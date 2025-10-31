@@ -144,8 +144,8 @@
           <p>游戏中的分数文本様式更改。</p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="nav-button prev-button" onclick="changePage(-1)">[上一頁]</a>
-      <a href="javascript:void(0)" class="nav-button next-button" onclick="changePage(1)">[下一頁]</a>
+      <a href="#page1" class="nav-button prev-button">[上一頁]</a>
+      <a href="#page2" class="nav-button next-button">[下一頁]</a>
     </div>
     <div class="black-section">
       <img src="logo.png" alt="FNF 红魔说唱乡" class="logo">
@@ -155,24 +155,22 @@
     <div class="version-info">Version: 1.0.1 (demo)</div>
   </div>
   <script>
-    // 分页功能
-    let currentPage = 1;
-    const totalPages = 2;
-    
-    function changePage(direction) {
-      // 隐藏当前页面
-      document.getElementById('page' + currentPage).classList.remove('active');
-      
-      // 计算下一页
-      currentPage += direction;
-      
-      // 边界检查
-      if (currentPage < 1) currentPage = totalPages;
-      if (currentPage > totalPages) currentPage = 1;
-      
-      // 显示新页面
-      document.getElementById('page' + currentPage).classList.add('active');
-    }
+    // 简单的分页功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 点击导航按钮时切换页面显示
+      document.querySelectorAll('.nav-button').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          // 隐藏所有页面
+          document.querySelectorAll('.page').forEach(function(page) {
+            page.classList.remove('active');
+          });
+          
+          // 获取目标页面ID并显示
+          var targetId = this.getAttribute('href').substring(1);
+          document.getElementById(targetId).classList.add('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
