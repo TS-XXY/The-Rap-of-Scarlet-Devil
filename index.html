@@ -108,6 +108,21 @@
       font-size: 12px;
       color: #999;
     }
+    
+    /* 分页样式 */
+    .page {
+      display: none;
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    /* 链接样式 */
+    a {
+      color: #FFD700;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -115,13 +130,22 @@
     <div class="red-section">
       <div class="update-notice">
         <h2>更新公告：</h2>
-        <p>Ver1.0.1</p>
-        <p>优化了玩家按键响应速度。</p>
-        <p>选项菜单已更改UI。</p>
-        <p>游戏中的分数文本様式更改。</p>
+        <!-- 第一页内容 -->
+        <div class="page active" id="page1">
+          <p>Ver1.0.0</p>
+          <p>發佈的第一個版本。2025.10.5上傳至Gamebanana（link： <a href="https://gamebanana.com/mods/624885" target="_blank">https://gamebanana.com/mods/624885</a> ）</p>
+          <p>'對於TomGriffin來説，這個版本反倒是不能發佈公開玩的，因爲本身就沒有製作完成'</p>
+        </div>
+        <!-- 第二页内容 -->
+        <div class="page" id="page2">
+          <p>Ver1.0.1</p>
+          <p>优化了玩家按键响应速度。</p>
+          <p>选项菜单已更改UI。</p>
+          <p>游戏中的分数文本様式更改。</p>
+        </div>
       </div>
-      <a href="#" class="nav-button prev-button">[上一頁]</a>
-      <a href="#" class="nav-button next-button">[下一頁]</a>
+      <a href="javascript:void(0)" class="nav-button prev-button" onclick="changePage(-1)">[上一頁]</a>
+      <a href="javascript:void(0)" class="nav-button next-button" onclick="changePage(1)">[下一頁]</a>
     </div>
     <div class="black-section">
       <img src="logo.png" alt="FNF 红魔说唱乡" class="logo">
@@ -130,5 +154,25 @@
   <div class="footer">
     <div class="version-info">Version: 1.0.1 (demo)</div>
   </div>
+  <script>
+    // 分页功能
+    let currentPage = 1;
+    const totalPages = 2;
+    
+    function changePage(direction) {
+      // 隐藏当前页面
+      document.getElementById('page' + currentPage).classList.remove('active');
+      
+      // 计算下一页
+      currentPage += direction;
+      
+      // 边界检查
+      if (currentPage < 1) currentPage = totalPages;
+      if (currentPage > totalPages) currentPage = 1;
+      
+      // 显示新页面
+      document.getElementById('page' + currentPage).classList.add('active');
+    }
+  </script>
 </body>
 </html>
